@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    max-height: 600px;
+    overflow: hidden;
+}
+
+.logo {
+    width: 150px;
+    height: auto; /* Zachovat poměr stran loga */
+    margin-bottom: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+/* Přidané animace */
+@keyframes rotateAccelerate {
+    0% {
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(720deg);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Třídy pro animace */
+.rotate-animate {
+    animation: rotateAccelerate 2s forwards;
+}
+
+.fade-out-animate {
+    animation: fadeOut 2s forwards;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.amount-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#amount {
+    font-size: 52px;
+    color: black;
+    padding: 5px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    text-align: center;
+    background-color: transparent;
+    width: auto;
+    height: 60px;
+    flex: 0 1 auto;
+}
+
+.currency {
+    font-size: 52px;
+    color: black;
+    margin-left: 5px;
+    margin-right: 5px;
+    line-height: 1;
+}
+
+.name-group {
+    display: flex;
+    align-items: center;
+}
+
+input[type="text"] {
+    font-size: 24px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    background-color: black;
+    color: white;
+    width: 150px;
+    height: 40px;
+    text-align: center;
+}
+
+input[type="text"]::placeholder {
+    color: white;
+    opacity: 0.6;
+}
+
+.reset-button {
+    background-color: black;
+    border: none;
+    outline: none;
+    font-size: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-left: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+#qrcode {
+    margin-top: 20px;
+}

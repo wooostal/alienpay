@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlienPay - Intro</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Zajistí, že nebude posuvník */
+        }
+
+        .logo {
+            width: 180px;
+            height: auto; /* Zachovat poměr stran loga */
+            animation: fadeOut 2s forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="alienpay.png" alt="Logo" class="logo">
+
+    <script>
+        // Po skončení animace přesměruj na menu.html
+        setTimeout(function() {
+            window.location.href = 'menu.html';
+        }, 2000); // Čas v milisekundách odpovídající délce animace
+    </script>
+</body>
+</html>
