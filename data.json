@@ -1,0 +1,7 @@
+[
+    { "name": "John Doe", "amount": "$100.00", "paid": true },
+    { "name": "Jane Smith", "amount": "$200.00", "paid": false },
+    { "name": "Alice Johnson", "amount": "$150.00", "paid": true },
+    { "name": "Bob Brown", "amount": "$50.00", "paid": false },
+    { "name": "Charlie Davis", "amount": "$300.00", "paid": true }
+]
