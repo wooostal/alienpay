@@ -28,6 +28,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    let initialAmountValue = amountInput.value;
+
     amountInput.addEventListener('input', function() {
         // Udržujte správný formát s dvěma desetinnými místy
         let validValue = amountInput.value.replace(/[^0-9.]/g, '');
@@ -46,14 +48,19 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     amountInput.addEventListener('focus', function() {
-        // Při kliknutí vymažte předchozí hodnotu
-        amountInput.value = "";
+        // Při kliknutí na pole, pokud je hodnota "0.00", vymažte ji
+        if (amountInput.value === initialAmountValue) {
+            amountInput.value = "";
+        }
     });
 
     amountInput.addEventListener('blur', function() {
-        // Pokud je prázdné, nastavte na "0.00"
+        // Pokud pole je prázdné, nastavte na "0.00"
         if (amountInput.value.trim() === "") {
-            amountInput.value = "0.00";
+            amountInput.value = initialAmountValue;
+        } else {
+            // Formátujte hodnotu na dvě desetinná místa
+            amountInput.value = formatAmount(amountInput.value);
         }
     });
 
