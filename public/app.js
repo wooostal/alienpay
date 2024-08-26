@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const resetButton = document.getElementById('resetButton');
 
     function formatAmount(value) {
-        let number = parseFloat(value.replace(',', '.'));
+        // Převést hodnotu na číslo s dvěma desetinnými místy
+        let number = parseFloat(value);
         if (!isNaN(number)) {
             return number.toFixed(2).replace('.', ',');
         }
@@ -27,50 +28,42 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    function handleAmountInput() {
-        let inputValue = amountInput.value.trim();
+    amountInput.addEventListener('input', function() {
+        // Udržujte správný formát s dvěma desetinnými místy
+        let validValue = amountInput.value.replace(/[^0-9.]/g, '');
 
-        // Allow only numbers and commas
-        let validValue = inputValue.replace(/[^0-9,]/g, '');
+        // Ujistěte se, že je maximálně jedno desetinné místo
+        if (validValue.includes('.')) {
+            const parts = validValue.split('.');
+            if (parts[1].length > 2) {
+                validValue = `${parts[0]}.${parts[1].substring(0, 2)}`;
+            }
+        }
 
-        // Ensure correct decimal format
-        let formattedValue = formatAmount(validValue);
-
-        // Set the value and maintain cursor position
-        const cursorPosition = amountInput.selectionStart;
-        amountInput.value = formattedValue;
-        amountInput.setSelectionRange(cursorPosition, cursorPosition); // Reset cursor position
-
+        // Nastavte hodnotu s opravou pozice kurzoru
+        amountInput.value = validValue;
         generateQRCode();
-    }
+    });
 
-    // Event listener to format the amount on input
-    amountInput.addEventListener('input', handleAmountInput);
+    amountInput.addEventListener('focus', function() {
+        // Při kliknutí vymažte předchozí hodnotu
+        amountInput.value = "";
+    });
 
-    // Event listener to reset amount on blur if empty
     amountInput.addEventListener('blur', function() {
+        // Pokud je prázdné, nastavte na "0.00"
         if (amountInput.value.trim() === "") {
-            amountInput.value = "0,00";
+            amountInput.value = "0.00";
         }
     });
 
-    // Event listener for name input
     nameInput.addEventListener('input', generateQRCode);
 
-    // Event listener for reset button
     resetButton.addEventListener('click', function() {
-        amountInput.value = "0,00";
+        amountInput.value = "0.00";
         nameInput.value = "";
         qrCodeContainer.innerHTML = "";
     });
 
-    // Event listener to clear the amount field on click
-    amountInput.addEventListener('click', function() {
-        if (amountInput.value === "0,00") {
-            amountInput.value = "";
-        }
-    });
-
-    // Initial QR code generation
     generateQRCode();
 });
