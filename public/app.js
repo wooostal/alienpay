@@ -38,17 +38,16 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     amountInput.addEventListener('focus', function() {
-        // Only clear the value if it was not already cleared
         if (!isAmountCleared) {
             amountInput.value = "";
+            isAmountCleared = true;
         }
-        isAmountCleared = true;
     });
 
     amountInput.addEventListener('blur', function() {
         // Format the value if not empty
         if (amountInput.value.trim() === "") {
-            amountInput.value = "0.00";
+            amountInput.value = "0";
         } else {
             let value = parseFloat(amountInput.value);
             if (!isNaN(value)) {
@@ -80,4 +79,9 @@ document.addEventListener("DOMContentLoaded", function() {
             qrCodeContainer.innerHTML = "";
         })
         .catch(error => {
-     
+            console.error('Error sending data:', error);
+        });
+    });
+
+    generateQRCode();
+});
