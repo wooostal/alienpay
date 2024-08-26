@@ -5,19 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlienPay - Intro</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden; /* Zabránit posouvání stránky */
+        }
+
         body {
             font-family: 'Open Sans', sans-serif;
             background: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden; /* Zajistí, že nebude posuvník */
         }
 
         .logo {
-            width: 180px;
+            max-width: 90vw; /* Maximální šířka loga je 90% šířky okna */
+            max-height: 90vh; /* Maximální výška loga je 90% výšky okna */
             height: auto; /* Zachovat poměr stran loga */
             animation: fadeOut 2s forwards;
         }
