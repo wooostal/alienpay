@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
         generateQRCode();
     });
 
-    amountInput.addEventListener('focus', function() {
+    amountInput.addEventListener('click', function() {
         if (!isAmountCleared) {
             amountInput.value = "";
             isAmountCleared = true;
@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     nameInput.addEventListener('input', generateQRCode);
+    amountInput.addEventListener('input', generateQRCode);
 
     resetButton.addEventListener('click', function() {
         const name = nameInput.value.trim();
