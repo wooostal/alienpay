@@ -6,14 +6,25 @@
     <title>AlienPay - Menu</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* Reset marginů a paddingů, aby nedocházelo k posouvání */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Zabránění scrollování a výška 100% */
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
         body {
             font-family: 'Open Sans', sans-serif;
             background: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
         }
 
         .container {
