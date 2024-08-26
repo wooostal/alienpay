@@ -3,18 +3,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const nameInput = document.getElementById('name');
     const qrCodeContainer = document.getElementById('qrcode');
     const resetButton = document.getElementById('resetButton');
-
-    function formatAmount(value) {
-        // Převést hodnotu na číslo s dvěma desetinnými místy
-        let number = parseFloat(value);
-        if (!isNaN(number)) {
-            return number.toFixed(2).replace('.', ',');
-        }
-        return "0,00";
-    }
+    let isValueCleared = false; // Flag to track if value has been cleared
 
     function generateQRCode() {
-        const amount = formatAmount(amountInput.value.trim());
+        const amount = amountInput.value.trim();
         const name = nameInput.value.trim();
 
         if (amount && name) {
@@ -28,46 +20,32 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    let initialAmountValue = amountInput.value;
-
     amountInput.addEventListener('input', function() {
-        // Udržujte správný formát s dvěma desetinnými místy
-        let validValue = amountInput.value.replace(/[^0-9.]/g, '');
-
-        // Ujistěte se, že je maximálně jedno desetinné místo
-        if (validValue.includes('.')) {
-            const parts = validValue.split('.');
-            if (parts[1].length > 2) {
-                validValue = `${parts[0]}.${parts[1].substring(0, 2)}`;
-            }
-        }
-
-        // Nastavte hodnotu s opravou pozice kurzoru
-        amountInput.value = validValue;
+        // Allow only numbers
+        amountInput.value = amountInput.value.replace(/[^0-9]/g, '');
         generateQRCode();
     });
 
     amountInput.addEventListener('focus', function() {
-        // Při kliknutí na pole, pokud je hodnota "0.00", vymažte ji
-        if (amountInput.value === initialAmountValue) {
+        // Clear the value when focusing if it's not already cleared
+        if (!isValueCleared) {
             amountInput.value = "";
+            isValueCleared = true;
         }
     });
 
     amountInput.addEventListener('blur', function() {
-        // Pokud pole je prázdné, nastavte na "0.00"
+        // If empty, set to "0"
         if (amountInput.value.trim() === "") {
-            amountInput.value = initialAmountValue;
-        } else {
-            // Formátujte hodnotu na dvě desetinná místa
-            amountInput.value = formatAmount(amountInput.value);
+            amountInput.value = "0";
         }
+        isValueCleared = false; // Reset the flag when the field loses focus
     });
 
     nameInput.addEventListener('input', generateQRCode);
 
     resetButton.addEventListener('click', function() {
-        amountInput.value = "0.00";
+        amountInput.value = "0";
         nameInput.value = "";
         qrCodeContainer.innerHTML = "";
     });
