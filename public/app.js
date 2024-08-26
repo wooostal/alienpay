@@ -27,18 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    function clearAmount() {
-        amountInput.value = "";
-    }
-
-    // Event listener to clear amount input on focus
-    amountInput.addEventListener('focus', function() {
-        // Always clear the input field when focused
-        clearAmount();
-    });
-
-    // Event listener to format the amount on input
-    amountInput.addEventListener('input', function() {
+    function handleAmountInput() {
         let inputValue = amountInput.value.trim();
 
         // Allow only numbers and commas
@@ -53,7 +42,10 @@ document.addEventListener("DOMContentLoaded", function() {
         amountInput.setSelectionRange(cursorPosition, cursorPosition); // Reset cursor position
 
         generateQRCode();
-    });
+    }
+
+    // Event listener to format the amount on input
+    amountInput.addEventListener('input', handleAmountInput);
 
     // Event listener to reset amount on blur if empty
     amountInput.addEventListener('blur', function() {
@@ -72,7 +64,13 @@ document.addEventListener("DOMContentLoaded", function() {
         qrCodeContainer.innerHTML = "";
     });
 
+    // Event listener to clear the amount field on click
+    amountInput.addEventListener('click', function() {
+        if (amountInput.value === "0,00") {
+            amountInput.value = "";
+        }
+    });
+
     // Initial QR code generation
     generateQRCode();
-    
 });
