@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const name = nameInput.value.trim();
 
         if (amount && name) {
-            const qrCodeData = `SPD*1.0*CC:CZK*ACC:CZ9140000000008699791200*AM:${amount}*`;
+            const qrCodeData = `SPD*1.0*AM:${amount}*CC:CZK*ACC:CZ9140000000008699791200*MSG:${encodeURIComponent(name)}`;
             qrCodeContainer.innerHTML = '';
             new QRCode(qrCodeContainer, {
                 text: qrCodeData,
